@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getData } from "../api";
 import Header from "./Header/Header";
+import Rates from "./Rates/Rates";
 
 const MainContainer = () => {
   const [rates, setRates] = useState([]);
@@ -16,7 +17,18 @@ const MainContainer = () => {
   useEffect(() => {
     getRates();
   }, []);
-  return <>{isLoading ? <div> Loading </div> : <Header rates={rates} />}</>;
+  return (
+    <>
+      {isLoading ? (
+        <div> Loading </div>
+      ) : (
+        <section>
+          <Header rates={rates} />
+           <Rates rates={rates} />
+        </section>
+      )}
+    </>
+  );
 };
 
 export default MainContainer;
