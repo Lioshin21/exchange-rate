@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getData } from "../api";
+import { Audio } from  'react-loader-spinner'
 import Header from "./Header/Header";
 import Rates from "./Rates/Rates";
 import styles from "./MainContainer.module.css";
@@ -28,8 +29,8 @@ const MainContainer = () => {
   }, []);
 
   return (
-    <>
-      {isLoading && <div> Loading... </div>}
+    <main className={styles.main}>
+      {isLoading && <Audio />}
       {rates && (
         <section>
           <Header rates={rates} />
@@ -41,7 +42,7 @@ const MainContainer = () => {
           При завантаженні данних виникла помилка!
         </div>
       )}
-    </>
+    </main>
   );
 };
 

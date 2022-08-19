@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import Form from "./Form/Form";
 import styles from "./Rates.module.css";
+import flipButton from "../../img/arrows.svg";
 
 const Rates = ({ rates }) => {
   const [firstCurrencyValue, setFirstCurrencyValue] = useState(1);
@@ -62,6 +64,14 @@ const Rates = ({ rates }) => {
         currentValue={firstCurrencyValue}
         setCurrencyValue={setFirstCurrencyValue}
         onInputChange={onFirstInputChange}
+      />
+      <img className={styles.arrow}
+        src={flipButton}
+        onClick={() => {
+          const value = firstCurrencyName;
+          setFirstCurrencyName(secondCurrencyName);
+          setSecondCurrencyName(value);
+        }}
       />
       <Form
         rates={rates}

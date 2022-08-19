@@ -3,7 +3,6 @@ import styles from "./PopularRates.module.css";
 const PopularRates = ({ rateEUR, rateUAH }) => {
   return (
     <div className={styles.rates__wrapper}>
-      <h2>Актуальний курс</h2>
       <div className={styles.rate}>
         <span>USD</span>
         <span>{rateUAH.toFixed(2)} ₴</span>

@@ -1,6 +1,17 @@
 .forms__container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   height: 100%;
+  margin-top: 100px;
 }
 
+.arrow {
+  width: 100px;
+  margin: 0 20px;
+  cursor: pointer;
+  transition: all .3s linear;
+}
+
+.arrow:hover {
+  transform: scale(1.1);
+}

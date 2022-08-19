@@ -1,3 +1,4 @@
+import React from "react";
 import Select from "react-select";
 import styles from "./Form.module.css";
 
@@ -23,9 +24,9 @@ const Form = ({
       <Select
         options={ratesList}
         onChange={getName}
-        defaultValue={{ value: "USD", label: "USD" }}
-        placeholder={currentName}
+        value={{value: currentName, label: currentName}}
       />
+      {(console.log({currentName}))}
       <input
         type="number"
         className={styles.input}

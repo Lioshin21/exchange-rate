@@ -1,7 +1,6 @@
 .rates__wrapper {
   display: flex;
   flex-direction: column;
-  margin-right: 50px;
 }
 
 .rate {
@@ -9,4 +8,5 @@
   justify-content: space-between;
   font-size: 20px;
   font-weight: 800;
+  gap: 50px;
 }

@@ -1,6 +1,10 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .error {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +12,7 @@
   color: white;
   font-size: 10px;
   text-align: center;
-  padding: 0 auto;
+  padding: 0;
   margin: 0;
   animation: 3s infinite scaleError;
 }
