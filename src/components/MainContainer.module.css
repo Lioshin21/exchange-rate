@@ -1,0 +1,24 @@
+.error {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  color: white;
+  font-size: 10px;
+  text-align: center;
+  padding: 0 auto;
+  margin: 0;
+  animation: 3s infinite scaleError;
+}
+
+@keyframes scaleError {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(3);
+  }
+}

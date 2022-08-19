@@ -9,48 +9,48 @@ const Rates = ({ rates }) => {
   const [secondCurrencyValue, setSecondCurrencyValue] = useState(1);
   const [secondCurrencyName, setSecondCurrencyName] = useState("USD");
 
-  const isFirstSelectChange = (firstCurrencyName) => {
+  const onFirstSelectChange = (firstCurrencyName) => {
     setSecondCurrencyValue(
       (
-        (firstCurrencyValue * rates[0][secondCurrencyName]) /
-        rates[0][firstCurrencyName]
+        (firstCurrencyValue * rates[secondCurrencyName]) /
+        rates[firstCurrencyName]
       ).toFixed(3)
     );
     setFirstCurrencyName(firstCurrencyName);
   };
 
-  const isFirstInputChange = (firstCurrencyValue) => {
+  const onFirstInputChange = (firstCurrencyValue) => {
     setSecondCurrencyValue(
       (
-        (firstCurrencyValue * rates[0][secondCurrencyName]) /
-        rates[0][firstCurrencyName]
+        (firstCurrencyValue * rates[secondCurrencyName]) /
+        rates[firstCurrencyName]
       ).toFixed(3)
     );
     setFirstCurrencyValue(firstCurrencyValue);
   };
 
-  const isSecondSelectChange = (secondCurrencyName) => {
+  const onSecondSelectChange = (secondCurrencyName) => {
     setFirstCurrencyValue(
       (
-        (secondCurrencyValue * rates[0][firstCurrencyName]) /
-        rates[0][secondCurrencyName]
+        (secondCurrencyValue * rates[firstCurrencyName]) /
+        rates[secondCurrencyName]
       ).toFixed(3)
     );
     setSecondCurrencyName(secondCurrencyName);
   };
 
-  const isSecondInputChange = (secondCurrencyValue) => {
+  const onSecondInputChange = (secondCurrencyValue) => {
     setFirstCurrencyValue(
       (
-        (secondCurrencyValue * rates[0][firstCurrencyName]) /
-        rates[0][secondCurrencyName]
+        (secondCurrencyValue * rates[firstCurrencyName]) /
+        rates[secondCurrencyName]
       ).toFixed(3)
     );
     setSecondCurrencyValue(secondCurrencyValue);
   };
 
   useEffect(() => {
-    isFirstInputChange(1);
+    onFirstInputChange(1);
   }, [firstCurrencyName, secondCurrencyName]);
 
   return (
@@ -58,18 +58,18 @@ const Rates = ({ rates }) => {
       <Form
         rates={rates}
         currentName={firstCurrencyName}
-        setCurrencyName={isFirstSelectChange}
+        setCurrencyName={onFirstSelectChange}
         currentValue={firstCurrencyValue}
         setCurrencyValue={setFirstCurrencyValue}
-        onInputChange={isFirstInputChange}
+        onInputChange={onFirstInputChange}
       />
       <Form
         rates={rates}
         currentName={secondCurrencyName}
-        setCurrencyName={isSecondSelectChange}
+        setCurrencyName={onSecondSelectChange}
         currentValue={secondCurrencyValue}
         setCurrencyValue={setFirstCurrencyValue}
-        onInputChange={isSecondInputChange}
+        onInputChange={onSecondInputChange}
       />
     </div>
   );

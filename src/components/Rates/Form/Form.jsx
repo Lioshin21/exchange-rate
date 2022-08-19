@@ -5,18 +5,17 @@ const Form = ({
   setCurrencyName,
   currentName,
   currentValue,
-  setCurrencyValue,
   rates,
   onInputChange,
 }) => {
-  const ratesList = Object.keys(rates[0]).map((el) => {
+  const ratesList = Object.keys(rates).map((el) => {
     return { value: el, label: el };
   });
 
   const getName = (data) => {
     const currency = data.value;
     setCurrencyName(currency);
-    onInputChange(rates[0][currency]);
+    onInputChange(rates[currency]);
   };
 
   return (
@@ -33,7 +32,6 @@ const Form = ({
         value={currentValue}
         onChange={(event) => onInputChange(event.target.value)}
       />
-      {console.log(currentName, currentValue)}
     </div>
   );
 };
