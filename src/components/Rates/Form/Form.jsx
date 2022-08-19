@@ -19,19 +19,26 @@ const Form = ({
     onInputChange(rates[currency]);
   };
 
+  const handlerInput = (value) => {
+    if (value < 0) {
+      onInputChange(0);
+    } else {
+      onInputChange(value);
+    }
+  };
+
   return (
     <div className={styles.form}>
       <Select
         options={ratesList}
         onChange={getName}
-        value={{value: currentName, label: currentName}}
+        value={{ value: currentName, label: currentName }}
       />
-      {(console.log({currentName}))}
       <input
         type="number"
         className={styles.input}
         value={currentValue}
-        onChange={(event) => onInputChange(event.target.value)}
+        onChange={(event) => handlerInput(event.target.value)}
       />
     </div>
   );

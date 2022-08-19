@@ -11,42 +11,46 @@ const Rates = ({ rates }) => {
   const [secondCurrencyValue, setSecondCurrencyValue] = useState(1);
   const [secondCurrencyName, setSecondCurrencyName] = useState("USD");
 
+  const fixedValue = (value, num = 2) => {
+    return value.toFixed(num);
+  };
+
   const onFirstSelectChange = (firstCurrencyName) => {
     setSecondCurrencyValue(
-      (
+      fixedValue(
         (firstCurrencyValue * rates[secondCurrencyName]) /
-        rates[firstCurrencyName]
-      ).toFixed(3)
+          rates[firstCurrencyName]
+      )
     );
     setFirstCurrencyName(firstCurrencyName);
   };
 
   const onFirstInputChange = (firstCurrencyValue) => {
     setSecondCurrencyValue(
-      (
+      fixedValue(
         (firstCurrencyValue * rates[secondCurrencyName]) /
-        rates[firstCurrencyName]
-      ).toFixed(3)
+          rates[firstCurrencyName]
+      )
     );
     setFirstCurrencyValue(firstCurrencyValue);
   };
 
   const onSecondSelectChange = (secondCurrencyName) => {
     setFirstCurrencyValue(
-      (
+      fixedValue(
         (secondCurrencyValue * rates[firstCurrencyName]) /
-        rates[secondCurrencyName]
-      ).toFixed(3)
+          rates[secondCurrencyName]
+      )
     );
     setSecondCurrencyName(secondCurrencyName);
   };
 
   const onSecondInputChange = (secondCurrencyValue) => {
     setFirstCurrencyValue(
-      (
+      fixedValue(
         (secondCurrencyValue * rates[firstCurrencyName]) /
-        rates[secondCurrencyName]
-      ).toFixed(3)
+          rates[secondCurrencyName]
+      )
     );
     setSecondCurrencyValue(secondCurrencyValue);
   };
@@ -65,7 +69,8 @@ const Rates = ({ rates }) => {
         setCurrencyValue={setFirstCurrencyValue}
         onInputChange={onFirstInputChange}
       />
-      <img className={styles.arrow}
+      <img
+        className={styles.arrow}
         src={flipButton}
         onClick={() => {
           const value = firstCurrencyName;
