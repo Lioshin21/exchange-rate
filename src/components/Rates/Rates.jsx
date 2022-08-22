@@ -11,7 +11,7 @@ const Rates = ({ rates }) => {
   const [secondValue, setSecondValue] = useState(1);
   const [secondName, setSecondName] = useState("USD");
 
-  const fixedValue = (value, num = 2) => {
+  const fixedValue = (value, num = 3) => {
     return value.toFixed(num);
   };
 
