@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getData } from "../api";
-import { Audio } from  'react-loader-spinner'
+import { Audio } from "react-loader-spinner";
 import Header from "./Header/Header";
 import Rates from "./Rates/Rates";
 import styles from "./MainContainer.module.css";
@@ -12,12 +12,11 @@ const MainContainer = () => {
 
   const getRates = async () => {
     try {
+      setError("");
       const response = await getData();
-      if (typeof response === "string") {
-        throw Error(response);
-      }
       setRates(response);
     } catch (error) {
+      console.log(error);
       setError(error);
     } finally {
       setIsLoading(false);
@@ -30,8 +29,8 @@ const MainContainer = () => {
 
   return (
     <main className={styles.main}>
-      {isLoading && <Audio />}
-      {rates && (
+      {isLoading && <Audio wrapperClass={styles.loader} />}
+      {rates && !errorText && (
         <section>
           <Header rates={rates} />
           <Rates rates={rates} />

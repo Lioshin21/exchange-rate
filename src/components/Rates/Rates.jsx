@@ -1,90 +1,83 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Form from "./Form/Form";
 import styles from "./Rates.module.css";
 import flipButton from "../../img/arrows.svg";
 
 const Rates = ({ rates }) => {
-  const [firstCurrencyValue, setFirstCurrencyValue] = useState(1);
-  const [firstCurrencyName, setFirstCurrencyName] = useState("USD");
+  const [firstValue, setFirstValue] = useState(1);
+  const [firstName, setFirstName] = useState("USD");
 
-  const [secondCurrencyValue, setSecondCurrencyValue] = useState(1);
-  const [secondCurrencyName, setSecondCurrencyName] = useState("USD");
+  const [secondValue, setSecondValue] = useState(1);
+  const [secondName, setSecondName] = useState("USD");
 
   const fixedValue = (value, num = 2) => {
     return value.toFixed(num);
   };
 
-  const onFirstSelectChange = (firstCurrencyName) => {
-    setSecondCurrencyValue(
-      fixedValue(
-        (firstCurrencyValue * rates[secondCurrencyName]) /
-          rates[firstCurrencyName]
-      )
-    );
-    setFirstCurrencyName(firstCurrencyName);
-  };
+  const onSelectChange =
+    (thisSetName, thisSetValue, anotherValue, anotherName) =>
+    (currentName) => {
+      thisSetValue(
+        fixedValue((anotherValue * rates[currentName]) / rates[anotherName])
+      );
+      thisSetName(currentName);
+    };
 
-  const onFirstInputChange = (firstCurrencyValue) => {
-    setSecondCurrencyValue(
-      fixedValue(
-        (firstCurrencyValue * rates[secondCurrencyName]) /
-          rates[firstCurrencyName]
-      )
-    );
-    setFirstCurrencyValue(firstCurrencyValue);
-  };
-
-  const onSecondSelectChange = (secondCurrencyName) => {
-    setFirstCurrencyValue(
-      fixedValue(
-        (secondCurrencyValue * rates[firstCurrencyName]) /
-          rates[secondCurrencyName]
-      )
-    );
-    setSecondCurrencyName(secondCurrencyName);
-  };
-
-  const onSecondInputChange = (secondCurrencyValue) => {
-    setFirstCurrencyValue(
-      fixedValue(
-        (secondCurrencyValue * rates[firstCurrencyName]) /
-          rates[secondCurrencyName]
-      )
-    );
-    setSecondCurrencyValue(secondCurrencyValue);
-  };
-
-  useEffect(() => {
-    onFirstInputChange(1);
-  }, [firstCurrencyName, secondCurrencyName]);
+  const onInputChange =
+    (thisSetValue, thisName, anotherSetValue, anotherName) =>
+    (currentValue) => {
+      thisSetValue(currentValue);
+      anotherSetValue(
+        fixedValue((currentValue * rates[anotherName]) / rates[thisName])
+      );
+    };
 
   return (
     <div className={styles.forms__container}>
       <Form
         rates={rates}
-        currentName={firstCurrencyName}
-        setCurrencyName={onFirstSelectChange}
-        currentValue={firstCurrencyValue}
-        setCurrencyValue={setFirstCurrencyValue}
-        onInputChange={onFirstInputChange}
+        currentName={firstName}
+        setName={onSelectChange(
+          setFirstName,
+          setFirstValue,
+          secondValue,
+          secondName
+        )}
+        currentValue={firstValue}
+        onInputChange={onInputChange(
+          setFirstValue,
+          firstName,
+          setSecondValue,
+          secondName
+        )}
       />
       <img
         className={styles.arrow}
         src={flipButton}
         onClick={() => {
-          const value = firstCurrencyName;
-          setFirstCurrencyName(secondCurrencyName);
-          setSecondCurrencyName(value);
+          setFirstName(secondName);
+          setFirstValue(secondValue);
+          setSecondName(firstName);
+          setSecondValue(firstValue);
         }}
       />
       <Form
         rates={rates}
-        currentName={secondCurrencyName}
-        setCurrencyName={onSecondSelectChange}
-        currentValue={secondCurrencyValue}
-        setCurrencyValue={setFirstCurrencyValue}
-        onInputChange={onSecondInputChange}
+        currentName={secondName}
+        setName={onSelectChange(
+          setSecondName,
+          setSecondValue,
+          firstValue,
+          firstName
+        )}
+        currentValue={secondValue}
+        onInputChange={onInputChange(
+          setSecondValue,
+          secondName,
+          setFirstValue,
+          firstName
+        )}
       />
     </div>
   );

@@ -3,7 +3,7 @@ import Select from "react-select";
 import styles from "./Form.module.css";
 
 const Form = ({
-  setCurrencyName,
+  setName,
   currentName,
   currentValue,
   rates,
@@ -13,32 +13,19 @@ const Form = ({
     return { value: el, label: el };
   });
 
-  const getName = (data) => {
-    const currency = data.value;
-    setCurrencyName(currency);
-    onInputChange(rates[currency]);
-  };
-
-  const handlerInput = (value) => {
-    if (value < 0) {
-      onInputChange(0);
-    } else {
-      onInputChange(value);
-    }
-  };
-
   return (
     <div className={styles.form}>
       <Select
         options={ratesList}
-        onChange={getName}
+        onChange={(data) => setName(data.value)}
         value={{ value: currentName, label: currentName }}
       />
       <input
+        min={0}
         type="number"
         className={styles.input}
         value={currentValue}
-        onChange={(event) => handlerInput(event.target.value)}
+        onChange={(event) => onInputChange(event.target.value)}
       />
     </div>
   );
